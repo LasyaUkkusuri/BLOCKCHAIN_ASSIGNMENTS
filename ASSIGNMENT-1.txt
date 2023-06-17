@@ -1,0 +1,100 @@
+1)Write a Solidity contract that declares a variable, performs some basic arithmetic operations, and logs the result using an event.
+Solution:
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract ArithmeticContract {
+    uint256 public result;
+
+    event ResultUpdated(uint256 newValue);
+
+    function performArithmeticOperations(uint256 a, uint256 b) external {
+       
+        uint256 sum = a + b;
+        uint256 difference = a - b;
+        uint256 product = a * b;
+        uint256 quotient = a / b;
+        uint256 modulus = a % b;
+
+       
+        result = sum;
+
+        
+        emit ResultUpdated(result);
+    }
+}
+
+2)Write a Solidity contract that includes a function with a conditional statement. The function should take an input parameter, perform some calculations based on the condition, and return the result.
+Solution:
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract ConditionalContract {
+    function calculateResult(uint256 number) external pure returns (uint256) {
+        uint256 result;
+
+        if (number > 10) {
+            result = number * 2;
+        } else {
+            result = number + 5;
+        }
+
+        return result;
+    }
+}
+
+3)Write a Solidity contract that uses a mapping to store and retrieve data. Include functions to add, update, and retrieve data from the mapping.
+Solution:
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract DataContract {
+    mapping(uint256 => string) private data;
+
+    function addData(uint256 key, string memory value) external {
+        data[key] = value;
+    }
+
+    function updateData(uint256 key, string memory value) external {
+        require(bytes(data[key]).length > 0, "Data not found");
+        data[key] = value;
+    }
+
+    function getData(uint256 key) external view returns (string memory) {
+        return data[key];
+    }
+}
+
+
+4)Write a Solidity contract that uses an array to store a list of addresses. Include functions to add, remove, and retrieve addresses from the array.
+Solution:
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract AddressList {
+    address[] private addresses;
+
+    function addAddress(address newAddress) external {
+        addresses.push(newAddress);
+    }
+
+    function removeAddress(address addressToRemove) external {
+        for (uint256 i = 0; i < addresses.length; i++) {
+            if (addresses[i] == addressToRemove) {
+                addresses[i] = addresses[addresses.length - 1];
+                addresses.pop();
+                break;
+            }
+        }
+    }
+
+    function getAddress(uint256 index) external view returns (address) {
+        require(index < addresses.length, "Invalid index");
+        return addresses[index];
+    }
+
+    function getAddressCount() external view returns (uint256) {
+        return addresses.length;
+    }
+}
+
